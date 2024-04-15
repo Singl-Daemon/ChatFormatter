@@ -21,7 +21,7 @@ void initConfig() {
 
 std::string getDimensionName(Player* pl) {
     if (pl) {
-        auto dimName = ((GMLIB_Player*)pl)->getDimensionName();
+        auto dimName = ((GMLIB_Player*)pl)->getDimensionTypeName();
         if (ConfigData::mDimMap.count(dimName)) {
             return ConfigData::mDimMap[dimName];
         }

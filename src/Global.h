@@ -12,6 +12,5 @@ extern std::unordered_map<std::string, std::string> mDimMap;
 
 extern void initPlugin();
 extern void listenEvent();
-extern void removeListener();
 extern void registerPAPI();
 extern void unregisterPAPI();

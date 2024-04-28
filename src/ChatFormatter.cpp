@@ -21,8 +21,3 @@ void listenEvent() {
         }
     );
 }
-
-void removeListener() {
-    auto& eventBus = ll::event::EventBus::getInstance();
-    eventBus.removePluginListeners("ChatFormatter");
-}

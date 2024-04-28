@@ -25,7 +25,6 @@ bool Entry::enable() {
 }
 
 bool Entry::disable() {
-    removeListener();
     unregisterPAPI();
     return true;
 }

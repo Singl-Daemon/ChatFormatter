@@ -1,11 +1,15 @@
 #pragma once
-#include "Global.h"
+#include <iostream>
+#include <unordered_map>
 
-std::string defaultConfig = R"({
-    "ChatFormat": "[%chatformatter_dimension%] {player} >> {message}",
-    "DimensionNameMap": {
-        "Overworld": "Overworld",
-        "Nether": "Nether",
-        "TheEnd": "The End"
-    }
-})";
+struct Config {
+    int version = 1;
+
+    std::string ChatFormat = "[%chatformatter_dimension%] {player} >> {message}";
+
+    std::unordered_map<std::string, std::string> DimensionNameMap = {
+        {"Overworld", "Overworld"},
+        {"Nether",    "Nether"   },
+        {"TheEnd",    "The End"  }
+    };
+};

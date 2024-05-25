@@ -1,7 +1,8 @@
+#include "Entry.h"
 #include "Global.h"
 
 std::string formatMessage(std::string_view author, std::string_view message, Player* pl) {
-    std::string result = ConfigData::mFormat;
+    std::string result = ChatFormatter::Entry::getInstance()->getConfig().ChatFormat;
     GMLIB::Server::PlaceholderAPI::translate(result, pl);
     ll::utils::string_utils::replaceAll(result, "{player}", author);
     ll::utils::string_utils::replaceAll(result, "{message}", message);

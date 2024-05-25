@@ -5,12 +5,6 @@
 
 extern ll::Logger logger;
 
-namespace ConfigData {
-extern std::string                                  mFormat;
-extern std::unordered_map<std::string, std::string> mDimMap;
-} // namespace ConfigData
-
-extern void initPlugin();
 extern void listenEvent();
 extern void registerPAPI();
 extern void unregisterPAPI();

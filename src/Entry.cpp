@@ -10,12 +10,13 @@ std::unique_ptr<Entry>& Entry::getInstance() {
     return instance;
 }
 
-bool Entry::load() {
-    initPlugin();
-    return true;
-}
+bool Entry::load() { return true; }
 
 bool Entry::enable() {
+    mConfig.emplace();
+    if (!ll::config::loadConfig(*mConfig, getSelf().getConfigDir() / u8"config.json")) {
+        ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
+    }
     registerPAPI();
     listenEvent();
     logger.info("ChatFormatter Loaded!");
@@ -33,6 +34,8 @@ bool Entry::unload() {
     getInstance().reset();
     return true;
 }
+
+Config& Entry::getConfig() { return mConfig.value(); }
 
 } // namespace ChatFormatter
 

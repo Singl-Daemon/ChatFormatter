@@ -2,7 +2,7 @@
 #include "Global.h"
 
 std::string getDimensionName(Player* pl) {
-    auto  dimName = ((GMLIB_Player*)pl)->getDimensionTypeName();
+    auto  dimName = ((GMLIB_Player*)pl)->getDimensionName();
     auto& nameMap = ChatFormatter::Entry::getInstance()->getConfig().DimensionNameMap;
     return nameMap.contains(dimName) ? nameMap[dimName] : dimName;
 }

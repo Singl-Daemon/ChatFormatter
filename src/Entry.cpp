@@ -17,6 +17,14 @@ bool Entry::enable() {
     if (!ll::config::loadConfig(*mConfig, getSelf().getConfigDir() / u8"config.json")) {
         ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
     }
+    ///////////////////// Update Config ////////////////////////
+    for (auto [oldKey, val] : mConfig->DimensionNameMap) {
+        auto newKey = GMLIB::StringUtils::toSnakeCase(oldKey);
+        mConfig->DimensionNameMap.erase(oldKey);
+        mConfig->DimensionNameMap[newKey] = val;
+    }
+    ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
+    ////////////////////////////////////////////////////////////
     registerPAPI();
     listenEvent();
     logger.info("ChatFormatter Loaded!");

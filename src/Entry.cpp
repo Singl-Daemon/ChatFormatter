@@ -25,6 +25,9 @@ bool Entry::enable() {
     }
     ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
     ////////////////////////////////////////////////////////////
+    if (getConfig().ChatLogger.LogToFile) {
+        chatLogger.setFile(getConfig().ChatLogger.FilePath);
+    }
     registerPAPI();
     listenEvent();
     logger.info("ChatFormatter Loaded!");

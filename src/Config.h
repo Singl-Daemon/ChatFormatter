@@ -3,7 +3,13 @@
 #include <unordered_map>
 
 struct Config {
-    int version = 1;
+    int version = 2;
+
+    struct chatLogger {
+        bool        Enabled   = false;
+        bool        LogToFile = false;
+        std::string FilePath  = "./logs/chat.log";
+    } ChatLogger;
 
     std::string ChatFormat = "[%chatformatter_dimension%] {player} >> {message}";
 

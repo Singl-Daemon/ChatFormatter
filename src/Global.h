@@ -4,6 +4,7 @@
 #define PLUGIN_NAME "ChatFormatter"
 
 extern ll::Logger logger;
+extern ll::Logger chatLogger;
 
 extern void listenEvent();
 extern void registerPAPI();

@@ -8,8 +8,8 @@ struct Config {
     std::string ChatFormat = "[%chatformatter_dimension%] {player} >> {message}";
 
     std::unordered_map<std::string, std::string> DimensionNameMap = {
-        {"Overworld", "Overworld"},
-        {"Nether",    "Nether"   },
-        {"TheEnd",    "The End"  }
+        {"overworld", "Overworld"},
+        {"nether",    "Nether"   },
+        {"the_end",   "The End"  }
     };
 };

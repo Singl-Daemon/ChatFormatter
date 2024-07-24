@@ -15,7 +15,7 @@
     },
     "asset_url": "https://github.com/GroupMountain/ChatFormatter/releases/download/v0.13.0/ChatFormatter-windows-x64.zip",
     "dependencies": {
-        "github.com/GroupMountain/GMLIB": ">=0.13.0"
+        "github.com/GroupMountain/GMLIB": ">=0.13.1"
     },
     "files": {
         "place": [

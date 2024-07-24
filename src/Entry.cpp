@@ -18,17 +18,17 @@ bool Entry::enable() {
         ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
     }
     ///////////////////// Update Config ////////////////////////
-   for (auto it = mConfig->DimensionNameMap.begin(); it != mConfig->DimensionNameMap.end();) {
-       auto oldKey = it->first;
-       auto val    = it->second;
-       auto newKey = GMLIB::StringUtils::toSnakeCase(oldKey);
-       if (oldKey != newKey) {
-           it                                = mConfig->DimensionNameMap.erase(it);
-           mConfig->DimensionNameMap[newKey] = val;
-       } else {
-           ++it;
-       }
-   }
+    for (auto it = mConfig->DimensionNameMap.begin(); it != mConfig->DimensionNameMap.end();) {
+        auto oldKey = it->first;
+        auto val    = it->second;
+        auto newKey = GMLIB::StringUtils::toSnakeCase(oldKey);
+        if (oldKey != newKey) {
+            it                                = mConfig->DimensionNameMap.erase(it);
+            mConfig->DimensionNameMap[newKey] = val;
+        } else {
+            ++it;
+        }
+    }
     ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
     ////////////////////////////////////////////////////////////
     if (getConfig().ChatLogger.LogToFile) {
@@ -56,4 +56,4 @@ Config& Entry::getConfig() { return mConfig.value(); }
 
 } // namespace ChatFormatter
 
-LL_REGISTER_PLUGIN(ChatFormatter::Entry, ChatFormatter::Entry::getInstance());
+LL_REGISTER_MOD(ChatFormatter::Entry, ChatFormatter::Entry::getInstance());

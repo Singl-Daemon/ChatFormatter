@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "tooth": "github.com/GroupMountain/ChatFormatter",
-    "version": "0.13.1",
+    "version": "0.13.2",
     "info": {
         "name": "ChatFormatter",
         "description": "Custom chat format, support placeholder api.",
@@ -15,7 +15,7 @@
     },
     "asset_url": "https://github.com/GroupMountain/ChatFormatter/releases/download/v0.13.0/ChatFormatter-windows-x64.zip",
     "dependencies": {
-        "github.com/GroupMountain/GMLIB": ">=0.13.1"
+        "github.com/GroupMountain/GMLIB": ">=0.13.10"
     },
     "files": {
         "place": [

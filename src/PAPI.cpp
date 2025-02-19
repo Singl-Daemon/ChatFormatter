@@ -1,10 +1,15 @@
 #include "Entry.h"
-#include "Global.h"
+
+#include <GMLIB/Server/PlaceholderAPI.h>
+#include <GMLIB/Server/PlayerAPI.h>
+#include <mc/world/actor/player/Player.h>
+
+namespace ChatFormatter {
 
 std::string getDimensionName(Player* pl) {
-    auto  dimName = ((GMLIB_Player*)pl)->getDimensionName();
-    auto& nameMap = ChatFormatter::Entry::getInstance()->getConfig().DimensionNameMap;
-    return nameMap.contains(dimName) ? nameMap[dimName] : dimName;
+    auto  dimName = static_cast<GMLIB_Player*>(pl)->getDimensionName();
+    auto& nameMap = ChatFormatter::Entry::getInstance().getConfig().DimensionNameMap;
+    return nameMap.contains(dimName) ? std::string(nameMap.at(dimName)) : std::string(dimName);
 }
 
 void registerPAPI() {
@@ -16,3 +21,5 @@ void registerPAPI() {
 }
 
 void unregisterPAPI() { GMLIB::Server::PlaceholderAPI::unregisterPlaceholder("chatformatter_dimension"); }
+
+} // namespace ChatFormatter

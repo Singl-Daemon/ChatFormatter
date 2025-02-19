@@ -1,11 +1,17 @@
 #pragma once
-#include <include_all.h>
 
-#define PLUGIN_NAME "ChatFormatter"
+#include "Entry.h"
 
-extern ll::Logger logger;
-extern ll::Logger chatLogger;
+#include "ll/api/io/LoggerRegistry.h"
+
+namespace ChatFormatter {
+
+inline auto& logger = Entry::getInstance().getSelf().getLogger();
+
+static auto chatLogger = ll::io::LoggerRegistry::getInstance().getOrCreate("Chat");
 
 extern void listenEvent();
 extern void registerPAPI();
 extern void unregisterPAPI();
+
+} // namespace ChatFormatter

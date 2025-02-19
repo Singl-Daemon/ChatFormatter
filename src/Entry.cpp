@@ -1,38 +1,30 @@
-#include "Entry.h"
+#include "Config.h"
 #include "Global.h"
 
-ll::Logger logger(PLUGIN_NAME);
+#include "ll/api/io/FileSink.h"
+#include "ll/api/io/PatternFormatter.h"
+
+#include <memory>
 
 namespace ChatFormatter {
 
-std::unique_ptr<Entry>& Entry::getInstance() {
-    static std::unique_ptr<Entry> instance;
+Entry& Entry::getInstance() {
+    static Entry instance;
     return instance;
 }
 
-bool Entry::load() { return true; }
+bool Entry::load() { return true; } // NOLINT
 
 bool Entry::enable() {
     mConfig.emplace();
     if (!ll::config::loadConfig(*mConfig, getSelf().getConfigDir() / u8"config.json")) {
         ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
-    }
-    ///////////////////// Update Config ////////////////////////
-    for (auto it = mConfig->DimensionNameMap.begin(); it != mConfig->DimensionNameMap.end();) {
-        auto oldKey = it->first;
-        auto val    = it->second;
-        auto newKey = GMLIB::StringUtils::toSnakeCase(oldKey);
-        if (oldKey != newKey) {
-            it                                = mConfig->DimensionNameMap.erase(it);
-            mConfig->DimensionNameMap[newKey] = val;
-        } else {
-            ++it;
-        }
-    }
-    ll::config::saveConfig(*mConfig, getSelf().getConfigDir() / u8"config.json");
-    ////////////////////////////////////////////////////////////
+    }  
     if (getConfig().ChatLogger.LogToFile) {
-        chatLogger.setFile(getConfig().ChatLogger.FilePath);
+        chatLogger->addSink(std::make_shared<ll::io::FileSink>(
+            getConfig().ChatLogger.FilePath,
+            ll::makePolymorphic<ll::io::PatternFormatter>("{tm:.3%F %T.} [{lvl}] {msg}", false)
+        ));
     }
     registerPAPI();
     listenEvent();
@@ -42,15 +34,12 @@ bool Entry::enable() {
     return true;
 }
 
-bool Entry::disable() {
+bool Entry::disable() { // NOLINT
     unregisterPAPI();
     return true;
 }
 
-bool Entry::unload() {
-    getInstance().reset();
-    return true;
-}
+bool Entry::unload() { return true; } // NOLINT
 
 Config& Entry::getConfig() { return mConfig.value(); }
 

@@ -1,6 +1,6 @@
 {
-    "name": "${pluginName}",
-    "entry": "${pluginFile}",
+    "name": "${modName}",
+    "entry": "${modFile}",
     "type": "native",
     "version": "0.13.0",
     "author": "GroupMountain",
